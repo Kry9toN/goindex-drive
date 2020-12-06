@@ -1039,6 +1039,5 @@ $(function () {
       render(url);
       return false;
   });*/
-
   render(path);
 });
