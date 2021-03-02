@@ -1,6 +1,9 @@
 // load in head necessary static
 document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">');
 document.write('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.css">');
+// Fontawesome icon
+document.write('<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">');
+document.write('<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">');
 // markdown support
 document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
@@ -136,12 +139,12 @@ function list_files(path,files){
         item['size'] = formatFileSize(item['size']);
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
             html +=`<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
-	            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
-	            <i class="mdui-icon material-icons">folder_open</i>
+	            <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
+	            <i class="mdui-icon fas fa-folder"></i>
 	              ${item.name}
 	            </div>
-	            <div class="mdui-col-sm-3 mdui-text-right">${item['modifiedTime']}</div>
-	            <div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
+	            <div class="mdui-col-sm-4 mdui-text-right">${item['modifiedTime']}</div>
+	            <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
 	            </a>
 	        </li>`;
         }else{
@@ -162,13 +165,61 @@ function list_files(path,files){
 	            p += "?a=view";
 	            c += " view";
             }
+            // File
+            if("|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0){
             html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
-	          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
-	          <i class="mdui-icon material-icons">insert_drive_file</i>
+	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
+	          <i class="mdui-icon fas fa-file-code"></i>
 	            ${item.name}
 	          </div>
-	          <div class="mdui-col-sm-3 mdui-text-right">${item['modifiedTime']}</div>
-	          <div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
+	          <div class="mdui-col-sm-4 mdui-text-right">${item['modifiedTime']}</div>
+	          <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
+	          </a>
+	      </li>`;
+           }
+           // File video
+           if("|mp4|webm|avi|gif|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
+	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
+	          <i class="mdui-icon fas fa-file-video"></i>
+	            ${item.name}
+	          </div>
+	          <div class="mdui-col-sm-4 mdui-text-right">${item['modifiedTime']}</div>
+	          <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
+	          </a>
+	      </li>`;
+           }
+           // File image
+           if("|bmp|jpg|jpeg|png|".indexOf(`|${ext}|`) >= 0){
+            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
+	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
+	          <i class="mdui-icon fas fa-image"></i>
+	            ${item.name}
+	          </div>
+	          <div class="mdui-col-sm-4 mdui-text-right">${item['modifiedTime']}</div>
+	          <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
+	          </a>
+	      </li>`;
+           }
+           // File soong
+           if("|m4a|mp3|wav|ogg|mpg|mpeg|".indexOf(`|${ext}|`) >= 0){
+            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
+	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
+	          <i class="mdui-icon fas fa-file-audio"></i>
+	            ${item.name}
+	          </div>
+	          <div class="mdui-col-sm-4 mdui-text-right">${item['modifiedTime']}</div>
+	          <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
+	          </a>
+	      </li>`;
+           }
+           html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
+	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
+	          <i class="mdui-icon fas fa-file"></i>
+	            ${item.name}
+	          </div>
+	          <div class="mdui-col-sm-4 mdui-text-right">${item['modifiedTime']}</div>
+	          <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
 	          </a>
 	      </li>`;
         }
