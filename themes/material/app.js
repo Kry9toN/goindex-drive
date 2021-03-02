@@ -387,7 +387,7 @@ function append_files_to_list(path, files) {
 	      </li>`;
            }
            // File video
-           if("|mp4|webm|avi|gif|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+           else if("|mp4|webm|avi|gif|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
             html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
 	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
 	          <i class="mdui-icon fas fa-file-video"></i>
@@ -399,7 +399,7 @@ function append_files_to_list(path, files) {
 	      </li>`;
            }
            // File image
-           if("|bmp|jpg|jpeg|png|".indexOf(`|${ext}|`) >= 0){
+           else if("|bmp|jpg|jpeg|png|".indexOf(`|${ext}|`) >= 0){
             html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
 	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
 	          <i class="mdui-icon fas fa-image"></i>
@@ -411,7 +411,7 @@ function append_files_to_list(path, files) {
 	      </li>`;
            }
            // File soong
-           if("|m4a|mp3|wav|ogg|mpg|mpeg|".indexOf(`|${ext}|`) >= 0){
+           else if("|m4a|mp3|wav|ogg|mpg|mpeg|".indexOf(`|${ext}|`) >= 0){
             html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
 	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
 	          <i class="mdui-icon fas fa-file-audio"></i>
@@ -422,7 +422,9 @@ function append_files_to_list(path, files) {
 	          </a>
 	      </li>`;
            }
-           html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
+           // Etc
+           else {
+            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
 	          <div class="mdui-col-xs-12 mdui-col-sm-5 mdui-text-truncate">
 	          <i class="mdui-icon fas fa-file"></i>
 	            ${item.name}
@@ -431,6 +433,7 @@ function append_files_to_list(path, files) {
 	          <div class="mdui-col-sm-3 mdui-text-right">${item['size']}</div>
 	          </a>
 	      </li>`;
+          }
     }
   }
 
