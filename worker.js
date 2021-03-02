@@ -1,6 +1,6 @@
 var authConfig = {
   siteName: 'KryPtoN - Drive', // WebSite Name
-  version: '6.0', // VersionControl, do not modify manually
+  version: '7.0', // VersionControl, do not modify manually
   // Only material!
   theme: 'material', // material  classic
    //add themes color, darkmode
